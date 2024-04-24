@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
     .iframe-container {
       position: relative;
       width: 100%;
-      padding-bottom: 177.78%; /* 1600 / 900 = 177.78% */
+      padding-top: 177.78%; /* 1600 / 900 = 177.78% */
     }
+    
     .iframe-container iframe {
       position: absolute;
       top: 0;
@@ -27,12 +16,23 @@
       height: 100%;
     }
   </style>
+  <script>
+    function resizeIframe() {
+      var iframe = document.getElementById('myIframe');
+      var container = document.getElementById('iframeContainer');
+      var containerWidth = container.offsetWidth;
+      var scaleFactor = containerWidth / 900; // Assuming the original width is 900px
+      
+      iframe.style.transform = 'scale(' + scaleFactor + ')';
+      iframe.style.transformOrigin = '0 0';
+    }
+    
+    window.addEventListener('resize', resizeIframe);
+  </script>
 </head>
 <body>
-  <div class="container">
-    <div class="iframe-container">
-      <iframe src="https://yuzhenlol.github.io/InferenceAI.github.io/" frameborder="0" scrolling="no" allowfullscreen></iframe>
-    </div>
+  <div id="iframeContainer" class="iframe-container">
+    <iframe id="myIframe" src="https://yuzhenlol.github.io/InferenceAI.github.io/" frameborder="0" scrolling="no"></iframe>
   </div>
 </body>
 </html>
