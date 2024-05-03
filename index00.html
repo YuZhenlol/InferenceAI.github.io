@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>自适应 iframe</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #iframe-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #my-iframe {
+            transform-origin: 0 0;
+            position: absolute;
+            border: none;
+	    top: 50%;
+   	    left: 50%;
+        }
+    </style>
+</head>
+<body bgcolor="#000000" background="background.jpg" -webkit-tap-highlight-color: rgba(200, 200, 200, 0);">
+    <div id="iframe-container">
+        <iframe id="my-iframe" src="index0.html" width="900" height="1600"></iframe>
+    </div>
+
+    <script>
+        const iframe = document.getElementById('my-iframe');
+        const container = document.getElementById('iframe-container');
+
+        function resizeIframe() {
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            const iframeRatio = 900 / 1600;
+
+            if (containerWidth / containerHeight < iframeRatio) {
+                // 宽度大于高度时，高度自适应
+		iframe.style.transform = "scale("+containerWidth/900+") translate(-50%, -50%)";
+            } else {
+                // 高度大于宽度时，宽度自适应
+                iframe.style.transform = "scale("+containerHeight/1600+") translate(-50%, -50%)";
+            }
+        }
+
+        window.addEventListener('resize', resizeIframe);
+        resizeIframe();
+    </script>
+</body>
+</html>
